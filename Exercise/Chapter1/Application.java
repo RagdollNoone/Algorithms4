@@ -13,6 +13,7 @@ public class Application{
 //        Ex_1_1_13.DoExercise();
 //        Ex_1_1_14.DoExercise();
 //        Ex_1_1_15.DoExercise();
-        Ex_1_1_19.DoExercise();
+//        Ex_1_1_19.DoExercise();
+        Ex_1_1_22.DoExercise();
     }
 }
