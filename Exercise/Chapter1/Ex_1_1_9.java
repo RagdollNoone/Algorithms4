@@ -6,7 +6,7 @@ public class Ex_1_1_9 {
     public static void DoExercise()
     {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please Input A Int: ");
+        System.out.print("Please input a number: ");
         int x = sc.nextInt();
 
         if (x <= 0)
