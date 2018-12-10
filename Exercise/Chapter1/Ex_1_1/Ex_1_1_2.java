@@ -1,4 +1,4 @@
-package Exercise.Chapter1;
+package Exercise.Chapter1.Ex_1_1;
 
 public class Ex_1_1_2
 {

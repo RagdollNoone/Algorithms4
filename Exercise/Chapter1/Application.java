@@ -1,5 +1,8 @@
 package Exercise.Chapter1;
 
+import Exercise.Chapter1.Ex_1_1.*;
+import Exercise.Chapter1.Ex_1_2.*;
+
 public class Application{
     public static void main(String[] args) {
 //        Ex_1_1_1.DoExercise();
@@ -14,6 +17,12 @@ public class Application{
 //        Ex_1_1_14.DoExercise();
 //        Ex_1_1_15.DoExercise();
 //        Ex_1_1_19.DoExercise();
-        Ex_1_1_22.DoExercise();
+//        Ex_1_1_22.DoExercise();
+
+//        Ex_1_2_6.DoExercise();
+//        Ex_1_2_7.DoExercise();
+
+        Ex_1_2_9.DoExercise();
+
     }
 }
