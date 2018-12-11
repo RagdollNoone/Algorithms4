@@ -22,7 +22,7 @@ public class Application{
 //        Ex_1_2_6.DoExercise();
 //        Ex_1_2_7.DoExercise();
 
-        Ex_1_2_9.DoExercise();
-
+//        Ex_1_2_9.DoExercise();
+//        SmartDate.create(2, 29, 1970);
     }
 }
