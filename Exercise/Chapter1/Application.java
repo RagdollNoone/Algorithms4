@@ -23,8 +23,9 @@ public class Application{
 //        Ex_1_2_7.DoExercise();
 //        Ex_1_2_9.DoExercise();
 
-        SmartDate smartDate = SmartDate.create(12, 1, 2016);
+        SmartDate smartDate = SmartDate.create(2, 29, 2017);
         String result = smartDate.getDayOfTheWeek();
         System.out.println("Result is: " + result);
+
     }
 }

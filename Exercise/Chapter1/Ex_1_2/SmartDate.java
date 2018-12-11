@@ -50,7 +50,6 @@ extends Date{
         int yearCode = this.getYearCode(this.getYear());
 
         assert (monthCode != -1);
-        assert (yearCode != -1);
 
         int checkValue = dayCode + monthCode + yearCode;
         DayOfWeek result = DayOfWeek.values()[(checkValue % 7)];
