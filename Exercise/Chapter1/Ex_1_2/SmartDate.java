@@ -14,7 +14,7 @@ extends Date{
             ErrorType checkResult = isValidInput(m, d, y);
 
             if (checkResult != ErrorType.NO_ERROR)
-                throw new DateException(checkResult.toString());
+                throw new SmartDateException(checkResult.toString());
         }
         catch (Exception e)
         {
@@ -53,6 +53,8 @@ extends Date{
 
         int checkValue = dayCode + monthCode + yearCode;
         DayOfWeek result = DayOfWeek.values()[(checkValue % 7)];
+
+        System.out.println("Result is: " + result);
 
         return result.toString();
     }
@@ -145,8 +147,8 @@ extends Date{
         return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
     }
 
-    public class DateException extends RuntimeException {
-        public DateException (String errorMessage) {
+    public class SmartDateException extends RuntimeException {
+        public SmartDateException(String errorMessage) {
             super(errorMessage);
         }
     }

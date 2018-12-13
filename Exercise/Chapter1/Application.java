@@ -2,6 +2,7 @@ package Exercise.Chapter1;
 
 import Exercise.Chapter1.Ex_1_1.*;
 import Exercise.Chapter1.Ex_1_2.*;
+import Exercise.Chapter1.Ex_1_3.*;
 
 public class Application{
     public static void main(String[] args) {
@@ -23,9 +24,15 @@ public class Application{
 //        Ex_1_2_7.DoExercise();
 //        Ex_1_2_9.DoExercise();
 
-        SmartDate smartDate = SmartDate.create(2, 29, 2017);
-        String result = smartDate.getDayOfTheWeek();
-        System.out.println("Result is: " + result);
+//        SmartDate smartDate = SmartDate.create(2, 29, 2017);
+//        String result = smartDate.getDayOfTheWeek();
 
+
+//        Ex_1_3_2.DoExercise();
+//        Parentheses.check();
+//        Ex_1_3_5.DoExercise();
+//        Ex_1_3_9.DoExercise();
+//        InfixToPostfix.convert();
+        EvaluatePostfix.evaluate();
     }
 }
