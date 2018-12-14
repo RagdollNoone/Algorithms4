@@ -33,6 +33,8 @@ public class Application{
 //        Ex_1_3_5.DoExercise();
 //        Ex_1_3_9.DoExercise();
 //        InfixToPostfix.convert();
-        EvaluatePostfix.evaluate();
+//        EvaluatePostfix.evaluate();
+//        Ex_1_3_15.DoExercise();
+        Ex_1_3_19.DoExercise();
     }
 }
