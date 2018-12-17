@@ -1,7 +1,6 @@
 package Exercise.Chapter1.Ex_1_3;
 
-import java.util.Random;
-
+// This is a test class
 public class Person {
     public String name;
     public int age;

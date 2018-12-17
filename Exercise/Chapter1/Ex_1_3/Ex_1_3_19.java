@@ -1,28 +1,49 @@
 package Exercise.Chapter1.Ex_1_3;
 
-import sun.awt.image.ImageWatched;
-
-import java.util.Random;
-
+// 19 20 21 24
 public class Ex_1_3_19 {
     static public void DoExercise() {
-        try {
-            Random rand = new Random();
+        LinkNode<Integer> lk = new LinkNode<>();
 
-            LinkNode lk1 = LinkNode.create(10, Class.forName("Exercise.Chapter1.Ex_1_3.Person"));
-
-            Person[] personArray = new Person[10];
-            for (int i = 0; i < personArray.length; i++) {
-                personArray[i] = new Person("Persion" + i, rand.nextInt(100));
-            }
-
-            LinkNode lk2 = LinkNode.create(personArray);
-
-            System.out.println("just for break");
+        for (int i = 0; i < 7; i++) {
+            lk.addTail(i);
         }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+
+//        lk.deleteTail();
+//        lk.deleteK(1);
+//        lk.deleteK(6);
+//        lk.deleteK(3);
+
+//        LinkNode<String> lk = new LinkNode<>();
+//
+//        for (int i = 0; i < 9; i++) {
+//            lk.addTail(String.valueOf(i));
+//        }
+
+//        boolean result;
+//        result = LinkNode.find(lk, "10");
+//        result = LinkNode.find(lk, "5");
+
+//        Node keyNode = lk.find("5");
+//        lk.removeAfter(keyNode);
+
+//        Node keyNode = lk.find("5");
+//        Node<String> node = new Node<String>("insert");
+//        lk.insertAfter(keyNode, node);
+
+//        int result = LinkNode.max(lk.getHead(), 0);
+
+//        Queue<Integer> queue = new Queue<>();
+//        for (int i = 0; i < 7; i++) {
+//            queue.enqueue(i);
+//        }
+//
+//
+//        while (!queue.isEmpty()) {
+//            int data = queue.dequeue();
+//        }
+
+//        lk.reserve();
+        lk.reserve(lk.getHead(), null);
     }
 }

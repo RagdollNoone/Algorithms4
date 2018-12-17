@@ -1,23 +1,16 @@
 package Exercise.Chapter1.Ex_1_3;
 
 public class Node<T> {
-    private T item;
-    private Node next;
+    public T item;
+    public Node next;
 
-    public Node() {
-        item = null;
-        next = null;
-    }
-
-    public void setItem(T data) {
-        item = data;
-    }
-
-    public void setNext(Node next) {
+    public Node(T data, Node next) {
+        this.item = data;
         this.next = next;
     }
 
-    public Node getNext() {
-        return this.next;
+    public Node(T data) {
+        this.item = data;
+        this.next = null;
     }
 }
