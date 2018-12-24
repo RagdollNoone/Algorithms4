@@ -144,7 +144,13 @@ public class DoubleLink {
         list.deleteNode(deleteNode);
     }
 
-    private class DoubleNode<T> {
+    static public DoubleNode<Person> createPerson(String name, int age) {
+        Person person = new Person(name, age);
+        DoubleNode<Person> result = new DoubleNode(person);
+        return result;
+    }
+
+    static private class DoubleNode<T> {
         public DoubleNode previous;
         public DoubleNode next;
         private T data;
