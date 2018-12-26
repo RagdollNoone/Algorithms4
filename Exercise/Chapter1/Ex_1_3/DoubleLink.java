@@ -55,6 +55,7 @@ public class DoubleLink {
         }
 
         head = head.next;
+        head.previous = null;
     }
 
     private void deleteTail() {
@@ -66,6 +67,7 @@ public class DoubleLink {
         }
 
         tail = tail.previous;
+        tail.next = null;
     }
 
     public DoubleNode<Person> findNode(String name, int age) {
@@ -82,32 +84,47 @@ public class DoubleLink {
     }
 
     private void addPreviousNode(DoubleNode<Person> findNode, DoubleNode<Person> addNode) {
-        N++;
+        if (null == findNode.previous) {
+            addHead(addNode);
+            return;
+        }
 
+        N++;
         DoubleNode<Person> temp = findNode.previous;
         findNode.previous = addNode;
         addNode.next = findNode;
         addNode.previous = temp;
+        temp.next = addNode;
     }
 
     private void addNextNode(DoubleNode<Person> findNode, DoubleNode<Person> addNode) {
-        N++;
+        if (null == findNode.next) {
+            addTail(addNode);
+            return;
+        }
 
+        N++;
         DoubleNode<Person> temp = findNode.next;
         findNode.next = addNode;
         addNode.previous = findNode;
         addNode.next = temp;
+        temp.previous = addNode;
     }
 
     private void deleteNode(DoubleNode<Person> deleteNode) {
-        N--;
-
-        if (size() == 1) {
-            head = tail = null;
+        if (head == deleteNode) {
+            deleteHead();
             return;
         }
 
+        if (tail == deleteNode) {
+            deleteTail();
+            return;
+        }
+
+        N--;
         deleteNode.previous.next = deleteNode.next;
+        deleteNode.next.previous = deleteNode.previous;
     }
 
     static public void addHead(DoubleLink list, DoubleNode<Person> node) {
@@ -148,6 +165,26 @@ public class DoubleLink {
         Person person = new Person(name, age);
         DoubleNode<Person> result = new DoubleNode(person);
         return result;
+    }
+
+    static public void printDoubleLink(DoubleLink list) {
+        System.out.println();
+
+        System.out.println("head to tail");
+        DoubleNode<Person> travel = list.head;
+        while (null != travel) {
+            System.out.print("Name: " + travel.data.name + " Age: " + travel.data.age + " ");
+            travel = travel.next;
+        }
+
+        System.out.println();
+
+        travel = list.tail;
+        System.out.println("tail to head:");
+        while (null != travel) {
+            System.out.print("Name: " + travel.data.name + " Age: " + travel.data.age + " ");
+            travel = travel.previous;
+        }
     }
 
     static private class DoubleNode<T> {
