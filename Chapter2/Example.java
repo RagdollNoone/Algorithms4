@@ -2,25 +2,18 @@ package Chapter2;
 import Utility.StdOut;
 import Utility.StdIn;
 
-public class Template {
+// 成本计算
+// 如果需要交换, 计算比较和交换的次数
+// 如果不需要交换, 计算访问次数
+
+// 按照额外内存的分配, 又可以分为原地排序算法或是其他算法
+public class Example {
 
 	public static void sort(Comparable[] a)
 	{
 		
 	}
-	
-	private static boolean less(Comparable v, Comparable w)
-	{
-		return v.compareTo(w) < 0;
-	}
-	
-	private static void exch(Comparable[] a, int i, int j)
-	{
-		Comparable t = a[i]; 
-		a[i] = a[j];
-		a[j] = t;
-	}
-	
+
 	private static void show(Comparable[] a)
 	{
 		for(int i = 0; i < a.length; i++)
@@ -32,7 +25,7 @@ public class Template {
 	public static boolean isSorted(Comparable[] a)
 	{
 		for(int i = 1; i < a.length; i++)
-			if (less(a[i], a[i - 1])) return false;
+			if (Sort.less(a[i], a[i - 1])) return false;
 		
 		return true;
 	}
