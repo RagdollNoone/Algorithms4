@@ -1,6 +1,6 @@
 package Exercise.Chapter1.Ex_1_3;
 
-import IO.StdIn;
+import Utility.StdIn;
 
 import java.util.Stack;
 

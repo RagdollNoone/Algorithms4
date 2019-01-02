@@ -46,7 +46,7 @@
  *
  ******************************************************************************/
 /**
- *  <i>Standard array IO</i>. This class provides methods for reading
+ *  <i>Standard array Utility</i>. This class provides methods for reading
  *  in 1D and 2D arrays from standard input and printing out to 
  *  standard output.
  *  <p>
@@ -58,7 +58,7 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-package IO;
+package Utility;
 public class StdArrayIO {
 
     // it doesn't make sense to instantiate this class

@@ -6,7 +6,7 @@
  *  Writes data of various types to: stdout, file, or socket.
  *
  ******************************************************************************/
-package IO;
+package Utility;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

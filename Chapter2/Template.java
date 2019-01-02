@@ -1,6 +1,6 @@
 package Chapter2;
-import IO.StdOut;
-import IO.StdIn;
+import Utility.StdOut;
+import Utility.StdIn;
 
 public class Template {
 
