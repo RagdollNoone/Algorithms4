@@ -11,7 +11,7 @@ public class Example {
 
 	public static void sort(Comparable[] a)
 	{
-		
+		Sort.ShellSort(a);
 	}
 
 	private static void show(Comparable[] a)
@@ -32,9 +32,11 @@ public class Example {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] a = StdIn.readAllStrings();
-		sort(a);
-		assert isSorted(a);
+//		String[] a = StdIn.readAllStrings();
+
+        Integer[] a = {7, 4, 8, 5, 2, 1, 9, 3, 6, 0};
+        sort(a);
+//		assert isSorted(a);
 		show(a);
 	}
 }
