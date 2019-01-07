@@ -1,5 +1,7 @@
 package Chapter2;
 
+import sun.plugin.com.event.COMEventHandler;
+
 public class Sort {
     public static boolean less(Comparable v, Comparable w)
     {
@@ -55,6 +57,10 @@ public class Sort {
 
     // Shell排序
     // 分割成h个有序序列, 用插入排序对每个子序列排序
+    // 可以理解为一个hxn的二维数组, 将数组的每一列处理成有序
+    // 这样元素最多移动二维数组的列数减一
+    // 特点:
+    // 最坏的情况下 也没有到达平方级别
     static public void ShellSort(Comparable[] a) {
         if (null == a || a.length == 0) return;
         int N = a.length;
@@ -73,30 +79,40 @@ public class Sort {
         }
     }
 
-    static public void MyShellSort(Comparable[] a) {
-        int low = 0;
-        int high = a.length - 1;
 
-        ShellSort(a, low, high);
+
+    // 归并排序
+    static private Comparable[] arrayCopy;
+    static public void MergeSort(Comparable[] a) {
+        if (null == a || a.length == 0) return;
+
+        arrayCopy = new Comparable[a.length];
+        MergeSort(a, 0, a.length - 1);
+        arrayCopy = null;
     }
 
-    static private void ShellSort(Comparable[] a, int low, int high) {
-        if (null == a || low >= high) return;
+    static private void MergeSort(Comparable[] a, int low, int high) {
+        if (low >= high) return;
 
         int mid = (low + high) / 2;
+        MergeSort(a, low, mid);
+        MergeSort(a, mid + 1, high);
 
-        ShellSort(a, low, mid);
-        ShellSort(a, mid + 1, high);
-
-        ShellMerge(a, low, mid, high);
+        Merge(a, low, mid, high);
     }
 
-    static private void ShellMerge(Comparable[] a, int low, int mid, int high) {
-        for (int i = mid + 1; i <= high; i++) {
-            for (int j = mid; j >= low && less(a[i], a[j]); j--) {
-                exch(a, i, j);
-            }
+    static private void Merge(Comparable[] a, int low, int mid, int high) {
+        int i = low; int j = mid + 1;
+
+        for (int k = low; k <= high; k++) {
+            arrayCopy[k] = a[k];
         }
 
+        for (int k = low; k <= high; k++) {
+            if (i > mid) a[k] = arrayCopy[j++];
+            if (j > high) a[k] = arrayCopy[i++];
+            if (less(arrayCopy[i], arrayCopy[j])) a[k] = arrayCopy[i++];
+            else a[k] = arrayCopy[j++];
+        }
     }
 }
