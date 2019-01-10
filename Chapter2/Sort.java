@@ -57,7 +57,7 @@ public class Sort {
 
     // Shell排序
     // 分割成h个有序序列, 用插入排序对每个子序列排序
-    // 可以理解为一个hxn的二维数组, 将数组的每一列处理成有序
+    // 可以理解为一个h x n的二维数组, 将数组的每一列处理成有序
     // 这样元素最多移动二维数组的列数减一
     // 特点:
     // 最坏的情况下 也没有到达平方级别
@@ -79,8 +79,6 @@ public class Sort {
         }
     }
 
-
-
     // 归并排序
     static private Comparable[] arrayCopy;
     static public void MergeSort(Comparable[] a) {
@@ -88,6 +86,23 @@ public class Sort {
 
         arrayCopy = new Comparable[a.length];
         MergeSort(a, 0, a.length - 1);
+        arrayCopy = null;
+    }
+
+    // 适合链表类型的数据结构 因为参与的节点总是从近及远
+    // 很适合断开原有连接, 建立新的连接, 并且可以不需要额
+    // 外的内存空间, 原地排序
+    static public void MergeSortBU(Comparable[] a) {
+        if (null == a || a.length == 0) return;
+
+        arrayCopy = new Comparable[a.length];
+
+        for (int sz = 1; sz < a.length; sz = 2 * sz) {
+            for (int low = 0; low < a.length - sz; low = 2 * sz) {
+                Merge(a, low, low + sz - 1, Math.min(low + 2 * sz - 1, a.length - 1));
+            }
+        }
+
         arrayCopy = null;
     }
 
@@ -114,5 +129,36 @@ public class Sort {
             if (less(arrayCopy[i], arrayCopy[j])) a[k] = arrayCopy[i++];
             else a[k] = arrayCopy[j++];
         }
+    }
+
+    static public void QuickSort(Comparable[] a) {
+        if (null == a || a.length == 0) return;
+
+        QuickSort(a, 0, a.length - 1);
+    }
+
+    static private void QuickSort(Comparable[] a, int low, int high) {
+        if (low >= high) return;
+
+        int mid = Partition(a, low, high);
+        QuickSort(a, low, mid - 1);
+        QuickSort(a, mid + 1, high);
+    }
+
+    static private int Partition(Comparable[] a, int low, int high) {
+        int mid = low;
+
+        while (low < high) {
+            while (less(a[mid], a[high])) high--;
+            exch(a, mid, high);
+            mid = high;
+
+
+            while (less(a[low], a[mid])) low++;
+            exch(a, mid, low);
+            mid = low;
+        }
+
+        return mid;
     }
 }

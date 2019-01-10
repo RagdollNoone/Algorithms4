@@ -11,7 +11,8 @@ public class Example {
 
 	public static void sort(Comparable[] a)
 	{
-		Sort.ShellSort(a);
+//		Sort.ShellSort(a);
+		Sort.QuickSort(a);
 	}
 
 	private static void show(Comparable[] a)
