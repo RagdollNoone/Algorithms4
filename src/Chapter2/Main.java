@@ -13,8 +13,9 @@ public class Main {
         Integer[] a = {7, 4, 8, 5, 2, 1, 9, 3, 6, 0};
 		String[] b = {"paper", "true", "soap", "floppy", "flower"};
 
-        InsertionSort.sort(b); // 传递的是数组引用的拷贝
+//        InsertionSort.sort(b); // 传递的是数组引用的拷贝
 //		assert isSorted(a);
-		InsertionSort.show(b);
+		MergeSort.Sort(a);
+		Sort.show(a);
 	}
 }

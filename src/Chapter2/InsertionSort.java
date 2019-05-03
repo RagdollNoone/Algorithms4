@@ -1,6 +1,6 @@
 package Chapter2;
 
-public class InsertionSort extends SelectionSort {
+public class InsertionSort extends Sort {
     static public void Sort(Comparable[] a) {
         if (null == a || a.length == 0) return;
 
