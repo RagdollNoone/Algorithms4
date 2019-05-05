@@ -15,7 +15,9 @@ public class Main {
 
 //        InsertionSort.sort(b); // 传递的是数组引用的拷贝
 //		assert isSorted(a);
-		MergeSort.Sort(a);
-		Sort.show(a);
+//		MergeSort.Sort(a);
+//		Sort.show(a);
+
+//		MergeSort.SortBU(a);
 	}
 }
