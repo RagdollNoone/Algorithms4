@@ -3,6 +3,18 @@ package Chapter2;
 public class MergeSort extends Sort {
     static Comparable[] support;
 
+    static public void SortBU(Comparable[] a) {
+        support = new Comparable[a.length];
+
+        for (int sz = 1; sz < a.length; sz = 2 * sz) {
+            System.out.println("sz: " + sz);
+            for (int low = 0; low < a.length - sz; low = low + 2 * sz) {
+                Merge(a, low, low + sz - 1, Math.min(a.length - 1, low + 2 * sz - 1));
+            }
+            Sort.show(a);
+        }
+    }
+
     static public void Sort(Comparable[] a) {
         support = new Comparable[a.length];
         Sort(a, 0, a.length - 1);
@@ -18,7 +30,6 @@ public class MergeSort extends Sort {
     }
 
     static private void Merge(Comparable[] a, int low, int mid, int high) {
-        System.out.println("low = " + low + " mid = " + mid + " high = " + high);
         int i = low;
         int j = mid + 1;
 
@@ -26,18 +37,25 @@ public class MergeSort extends Sort {
             support[k] = a[k];
         }
 
-        for (int k = low; k <= high; k++) {
-            if (less(a[i], a[j])) {
-                a[k] = support[i++];
-            } else if (less(a[j], a[i])) {
-                a[k] = support[j++];
-            } else if (i > mid) {
-                a[k] = support[j++];
-            } else if (j > high) {
-                a[k] = support[i++];
-            }
+        // 错误的示范, 虽然同样的四个分支, 这样写会导致算法运行失败
+        // 应为边界情况时不能应用less比较, 下标会益出
+//        for (int k = low; k <= high; k++) {
+//            if (less(a[i], a[j])) {
+//                a[k] = support[i++];
+//            } else if (less(a[j], a[i])) {
+//                a[k] = support[j++];
+//            } else if (i > mid) {
+//                a[k] = support[j++];
+//            } else if (j > high) {
+//                a[k] = support[i++];
+//            }
+//        }
 
-            System.out.println("k = " + k + " a[k] = " + a[k]);
+        for (int k = low; k <= high; k++) {
+            if (i > mid) a[k] = support[j++];
+            else if (j > high) a[k] = support[i++];
+            else if (less(support[i], support[j])) a[k] = support[i++];
+            else a[k] = support[j++];
         }
 
     }
