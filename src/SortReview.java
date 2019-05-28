@@ -8,9 +8,10 @@ public class SortReview {
 //        quickSort(a, 0, a.length - 1);
 //        show(a);
 
-        support = new Comparable[a.length];
-        mergeSort(a, 0, a.length - 1);
-        show(a);
+//        support = new Comparable[a.length];
+//        mergeSort(a, 0, a.length - 1);
+//        mergeSortBU(a);
+//        show(a);
 
     }
 
@@ -113,12 +114,11 @@ public class SortReview {
         mergeSort(a, low, mid);
         mergeSort(a, mid + 1, high);
 
-        System.out.println("---------------------");
-        System.out.println("low: " + low + " mid: " + mid + " high: " + high);
+//        System.out.println("---------------------");
+//        System.out.println("low: " + low + " mid: " + mid + " high: " + high);
         merge(a, low, mid, high);
 
-        show(a);
-
+//        show(a);
     }
 
     static void merge(Comparable[] a, int low, int mid, int high) {
@@ -143,9 +143,19 @@ public class SortReview {
             if (less(support, i, j)) a[k] = support[i++];
             else a[k] = support[j++];
 
-            System.out.println("k = " + k + " a[k] = " + a[k] + " i = " + i + " j = " + j);
+//            System.out.println("k = " + k + " a[k] = " + a[k] + " i = " + i + " j = " + j);
         }
     }
 
+    static void mergeSortBU(Comparable[] a) {
+        for (int sz = 1; sz < a.length; sz *= 2) {
+            for (int i = 0; i < a.length; i += 2 * sz) {
+                merge(a, i, i + sz - 1, Math.min(i + 2 * sz - 1, a.length - 1));
+            }
+        }
+    }
 
+    static void shellSort(Comparable[] a) {
+
+    }
 }
