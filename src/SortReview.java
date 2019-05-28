@@ -140,10 +140,10 @@ public class SortReview {
                 continue;
             }
 
-            if (less(a, i, j)) a[k] = support[i++];
+            if (less(support, i, j)) a[k] = support[i++];
             else a[k] = support[j++];
 
-            System.out.println("k = " + k + " a[k] = " + a[k]);
+            System.out.println("k = " + k + " a[k] = " + a[k] + " i = " + i + " j = " + j);
         }
     }
 
