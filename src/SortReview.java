@@ -13,6 +13,9 @@ public class SortReview {
 //        mergeSortBU(a);
 //        show(a);
 
+        shellSort(a);
+        show(a);
+
     }
 
     static void show(Comparable[] a) {
@@ -156,6 +159,16 @@ public class SortReview {
     }
 
     static void shellSort(Comparable[] a) {
+        int n = a.length / 3;
 
+        while (n > 0) {
+            for (int i = n; i < a.length; i++) {
+                for (int j = i; j - n >= 0 && less(a, j, j - n); j -= n) {
+                    exch(a, j, j - n);
+                }
+            }
+
+            n = n / 3;
+        }
     }
 }
