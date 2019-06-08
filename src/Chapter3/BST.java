@@ -2,15 +2,17 @@ package Chapter3;
 
 public class BST<Key extends Comparable, Value> {
     private class Node {
-        public Key key;
-        public Value value;
-        public Node left;
-        public Node right;
+        private Key key;
+        private Value value;
+        private Node left;
+        private Node right;
         int N;
 
         public Node(Key key, Value value) {
             this.key = key;
             this.value = value;
+            this.left = null;
+            this.right = null;
             N = 1;
         }
     }
@@ -20,25 +22,25 @@ public class BST<Key extends Comparable, Value> {
     public int size() {
         if (null == root) return 0;
 
-        return size();
+        return size(root);
     }
 
     private int size(Node node) {
-        node.N = node.left.N + node.right.N + 1;
+        if (null == node) return 0;
         return node.N;
     }
 
-    public Node get(Key key) {
+    public Value get(Key key) {
         if (null == root) return null;
 
         return get(root, key);
     }
 
-    private Node get(Node node, Key key) {
+    private Value get(Node node, Key key) {
         if (null == node) return null;
 
         if (node.key.compareTo(key) == 0) {
-            return node;
+            return node.value;
         }
 
         if (node.key.compareTo(key) > 0) {
@@ -79,13 +81,31 @@ public class BST<Key extends Comparable, Value> {
             }
         }
 
-        size(node);
+        node.N = size(node.left) + size(node.right) + 1;
     }
 
     public void delete(Key key) {
         if (null == root) return;
 
+        root = delete(root, key);
+    }
 
+    private Node delete(Node node, Key key) {
+        if (null == node) return null;
+
+        int cmp = node.key.compareTo(key);
+
+        if (cmp > 0) return delete(node.left, key);
+        if (cmp < 0) return delete(node.right, key);
+        else {
+            Node t = node.left;
+            Node tt = min(node.right);
+            node.right = deleteMin(node.right);
+            tt.left = t;
+            tt.right = node.right;
+            tt.N = size(tt.left) + size(tt.right) + 1;
+            return tt;
+        }
     }
 
     public Value max() {
@@ -93,20 +113,51 @@ public class BST<Key extends Comparable, Value> {
     }
 
     public Value min() {
-        return null;
-    }
-
-    public Node floor(Key key) {
         if (null == root) return null;
 
-        return floor(root, key);
+        return min(root).value;
+    }
+
+    private Node min(Node node) {
+        if (null == node.left) return node;
+        return min(node.left);
+    }
+
+    public void deleteMin() {
+        if (null == root) return;
+
+        root = deleteMin(root);
+    }
+
+    private Node deleteMin(Node node) {
+        if (null == node) return null;
+
+        if (null == node.left) return node.right;
+        else {
+            node.left = deleteMin(node.left);
+            node.N = size(node.left) + size(node.right) + 1;
+            return node;
+        }
+    }
+
+    public Key floor(Key key) {
+        if (null == root) return null;
+        Node t = floor(root, key);
+
+        if (null == t) return null;
+        return t.key;
     }
 
     private Node floor(Node node, Key key) {
         if (null == node) return null;
 
-        Node parent = get(node, key);
-        return parent.left;
+        int cmp = node.key.compareTo(key);
+        if (cmp == 0) return node;
+        if (cmp > 0) return floor(node.left, key);
+        else {
+            if (null == node.right) return node;
+            else return floor(node.right, key);
+        }
     }
 
     public Value ceiling(Key key) {
@@ -115,10 +166,32 @@ public class BST<Key extends Comparable, Value> {
 
 
     public int rank(Key key) {
-        return 0;
+        if (null == root) return 0;
+        return rank(root, key);
     }
 
-    public Value select(int k) {
-        return null;
+    private int rank(Node node, Key key) {
+        int cmp = node.key.compareTo(key);
+
+        if (cmp == 0) return size(node);
+        if (cmp > 0) return rank(node.left, key);
+        else return size(node.left) + rank(node.right, key);
+    }
+
+    public Key select(int k) {
+        if (null == root) return null;
+        if (k <= 0) return null;
+
+        return select(root, k);
+    }
+
+    private Key select(Node node, int k) {
+        if (null == node) return null;
+        if (k > size(node)) return null;
+
+        int sizeLeft = size(node.left);
+        if (k == sizeLeft + 1) return node.key;
+        if (k <= sizeLeft) return select(node.left, k);
+        else return select(node.right, k - 1 - sizeLeft);
     }
 }

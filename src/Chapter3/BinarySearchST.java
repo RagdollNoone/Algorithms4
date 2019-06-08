@@ -13,30 +13,62 @@ public class BinarySearchST<Key extends Comparable, Value> {
     }
 
     public int size() {
-        return 0;
+        return N;
     }
 
     public Value get(Key key) {
+        int i = rank(key);
+        if (i < N && keys[i].compareTo(key) == 0) return values[i];
         return null;
     }
 
     public void put(Key key, Value value) {
+        int i = rank(key);
+        if (i < N && keys[i].compareTo(key) == 0) {
+            values[i] = value;
+            return;
+        }
 
+        // 只讨论没有满的情况
+        for (int k = N - 2; k >= i; k --) {
+            keys[k + 1] = keys[k];
+            values[k + 1] = values[k];
+        }
+
+        keys[i] = key;
+        values[i] = value;
+        N++;
     }
 
     public void delete(Key key) {
+        int i = rank(key);
 
+        if (i < N && keys[i].compareTo(key) == 0) {
+            for (int k = i; k < N - 1; k++) {
+                keys[k] = keys[k + 1];
+                values[k] = values[k + 1];
+            }
+
+            keys[N - 1] = null;
+            values[N - 1] = null;
+            N--;
+        }
     }
 
     public Value max() {
-        return null;
+        return values[N - 1];
     }
 
     public Value min() {
-        return null;
+        return values[0];
     }
 
     public Value floor(Key key) {
+        int i = rank(key);
+
+        if (i == N - 1) return values[i];
+        if ((i - 1) >= 0) return values[i - 1];
+
         return null;
     }
 
@@ -77,6 +109,6 @@ public class BinarySearchST<Key extends Comparable, Value> {
     }
 
     public Value select(int k) {
-        return null;
+        return values[k];
     }
 }
