@@ -1,6 +1,46 @@
 package Chapter3;
 
 public class BST<Key extends Comparable, Value> {
+
+    public static void main(String[] args) {
+        BST<String, Integer> bst = new BST<>();
+
+        bst.put("S", 0);
+        bst.put("E", 1);
+        bst.put("A", 2);
+        bst.put("R", 3);
+        bst.put("C", 4);
+        bst.put("H", 5);
+        bst.put("E", 6);
+        bst.put("X", 7);
+        bst.put("A", 8);
+        bst.put("M", 9);
+        bst.put("P", 10);
+        bst.put("L", 11);
+        bst.put("E", 12);
+
+        bst.printInOrder(bst.getRoot());
+        System.out.println();
+
+        Integer result = bst.get("R");
+        System.out.println("Get R value is " + result);
+
+        result = bst.get("Q");
+        System.out.println("Get Q value is " + result);
+
+        String keyResult = bst.floor("G");
+        System.out.println("Floor G value is " + keyResult);
+
+        keyResult = bst.floor("Q");
+        System.out.println("Floor Q value is " + keyResult);
+
+        keyResult = bst.min();
+        System.out.println("Min value is " + keyResult);
+
+        keyResult = bst.select(6);
+        System.out.println("Select 6 value is " + keyResult);
+    }
+
     private class Node {
         private Key key;
         private Value value;
@@ -18,6 +58,10 @@ public class BST<Key extends Comparable, Value> {
     }
 
     private Node root;
+
+    public Node getRoot() {
+        return root;
+    }
 
     public int size() {
         if (null == root) return 0;
@@ -73,7 +117,7 @@ public class BST<Key extends Comparable, Value> {
             }
         }
 
-        if (node.key.compareTo(key) > 0) {
+        if (node.key.compareTo(key) < 0) {
             if (null == node.right) {
                 node.right = new Node(key, value);
             } else {
@@ -108,14 +152,14 @@ public class BST<Key extends Comparable, Value> {
         }
     }
 
-    public Value max() {
+    public Key max() {
         return null;
     }
 
-    public Value min() {
+    public Key min() {
         if (null == root) return null;
 
-        return min(root).value;
+        return min(root).key;
     }
 
     private Node min(Node node) {
@@ -153,10 +197,15 @@ public class BST<Key extends Comparable, Value> {
 
         int cmp = node.key.compareTo(key);
         if (cmp == 0) return node;
-        if (cmp > 0) return floor(node.left, key);
+        if (cmp > 0) {
+            return floor(node.left, key);
+        }
         else {
             if (null == node.right) return node;
-            else return floor(node.right, key);
+            Node result = floor(node.right, key);
+
+            if (null == result) return node;
+            return result;
         }
     }
 
@@ -193,5 +242,16 @@ public class BST<Key extends Comparable, Value> {
         if (k == sizeLeft + 1) return node.key;
         if (k <= sizeLeft) return select(node.left, k);
         else return select(node.right, k - 1 - sizeLeft);
+    }
+
+    public void printInOrder(Node node) {
+        if (null == node) {
+            System.out.print("null ");
+            return;
+        }
+
+        System.out.print(node.key + " ");
+        printInOrder(node.left);
+        printInOrder(node.right);
     }
 }
