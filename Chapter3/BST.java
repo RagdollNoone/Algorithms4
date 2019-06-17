@@ -37,8 +37,16 @@ public class BST<Key extends Comparable, Value> {
         keyResult = bst.min();
         System.out.println("Min value is " + keyResult);
 
-        keyResult = bst.select(6);
-        System.out.println("Select 6 value is " + keyResult);
+        keyResult = bst.select(8);
+        System.out.println("Select 8 value is " + keyResult);
+
+        bst.delete("A");
+        bst.delete("X");
+        bst.delete("H");
+        bst.delete("S");
+
+        bst.printInOrder(bst.getRoot());
+        System.out.println();
     }
 
     private class Node {
@@ -139,17 +147,20 @@ public class BST<Key extends Comparable, Value> {
 
         int cmp = node.key.compareTo(key);
 
-        if (cmp > 0) return delete(node.left, key);
-        if (cmp < 0) return delete(node.right, key);
+        if (cmp > 0) node.left = delete(node.left, key);
+        else if (cmp < 0) node.right = delete(node.right, key);
         else {
-            Node t = node.left;
-            Node tt = min(node.right);
-            node.right = deleteMin(node.right);
-            tt.left = t;
-            tt.right = node.right;
-            tt.N = size(tt.left) + size(tt.right) + 1;
-            return tt;
+            if (null == node.right) return node.left;
+            if (null == node.left) return node.right;
+
+            Node t = node;
+            node = min(t.right);
+            node.left = t.left;
+            node.right = deleteMin(t.right);
         }
+
+        node.N = size(node.left) + size(node.right) + 1;
+        return node;
     }
 
     public Key max() {
