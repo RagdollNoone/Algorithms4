@@ -44,8 +44,8 @@ public class Graph {
                 int v = in.readInt();
                 int w = in.readInt();
 
-                validateVertex(v);
-                validateVertex(w);
+                validateVertex(this, v);
+                validateVertex(this, w);
 
                 addEdge(v, w);
             }
@@ -79,15 +79,9 @@ public class Graph {
         return this.edges;
     }
 
-    private void validateVertex(int v) {
-        if (v < 0 || v > vertexs - 1) {
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (v - 1));
-        }
-    }
-
     public void addEdge(int v, int w) {
-        validateVertex(v);
-        validateVertex(w);
+        validateVertex(this, v);
+        validateVertex(this, w);
 
         this.edges++;
 
@@ -136,6 +130,20 @@ public class Graph {
 
         return count / 2;
     }
+
+    public static void validateVertex(Graph G, int v) {
+        if (v < 0 || v > G.getVertexs() - 1) {
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (v - 1));
+        }
+    }
+
+    // 用SET代替BAG 邻接集
+
+    // 添加一个顶点
+    // 删除一个顶点
+
+    // 删除一条边
+    // 检查是否含有一条边
 
     public String toString() {
         return "";
