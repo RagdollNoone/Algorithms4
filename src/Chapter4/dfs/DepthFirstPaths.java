@@ -4,7 +4,6 @@ import Chapter4.basic.Graph;
 import Utility.In;
 import Utility.StdOut;
 
-import java.util.Queue;
 import java.util.Stack;
 
 public class DepthFirstPaths {
@@ -14,11 +13,17 @@ public class DepthFirstPaths {
     private final int s;
 
     public DepthFirstPaths(Graph G, int s) {
+        Graph.printGraph(G);
+
         this.G = G;
         this.s = s;
 
         edgeTo = new int[G.getVertexs()];
         marked = new boolean[G.getVertexs()];
+
+        for (int i = 0; i < G.getVertexs(); i++) {
+            edgeTo[i] = -1;
+        }
 
         Graph.validateVertex(this.G, s);
 
@@ -31,6 +36,13 @@ public class DepthFirstPaths {
         for (int w : this.G.adj(v)) {
             if (!marked[w]) {
                 edgeTo[w] = v;
+
+                System.out.println();
+                System.out.println("Current visit " + v);
+                System.out.println("Next visit " + w);
+                printMarked();
+                printEdgeTo();
+
                 dfs(w);
             }
         }
@@ -52,6 +64,30 @@ public class DepthFirstPaths {
         path.push(s);
 
         return path;
+    }
+
+    private void printEdgeTo() {
+        if (null == edgeTo) return;
+
+        System.out.println("printEdgeTo");
+
+        for (int i = 0; i < edgeTo.length; i++) {
+            System.out.print(edgeTo[i] + " ");
+        }
+
+        System.out.println();
+    }
+
+    private void printMarked() {
+        if (null == marked) return;
+
+        System.out.println("printMarked");
+
+        for (int i = 0; i < marked.length; i++) {
+            System.out.print(marked[i] + " ");
+        }
+
+        System.out.println();
     }
 
     public static void main(String[] args) {

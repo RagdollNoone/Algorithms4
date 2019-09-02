@@ -144,6 +144,18 @@ public class Graph {
         }
     }
 
+    public static void printGraph(Graph G) {
+        for (int i = 0; i < G.getVertexs(); i++) {
+            System.out.print("Vertex " + i + " : ");
+
+            for (Integer v : G.adj(i)) {
+                System.out.print(v + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
     // 用SET代替BAG 邻接集
 
     // 添加一个顶点
